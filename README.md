@@ -1,11 +1,23 @@
 # superfast-lemp-wp
 
-## AUTOMATIC INSTALLATION
+#### Initial Server Setup
+
+This section was taken from [Digitalocean](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04/) guide and it just get the job done.
+
+Log into your server
 ```
-curl https://github.com/tharindutpk/superfast-lemp-wp/install.sh
+$ ssh root@your_server_ip
 ```
 
-## MANUAL INSTALLATION
+Add new user from here
+```
+$ adduser tharindu
+```
+
+Add newly created user into group of sudo
+```
+$ usermod -aG sudo tharindu
+```
 
 #### Install Nxinx
 
