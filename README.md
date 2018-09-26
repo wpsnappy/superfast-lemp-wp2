@@ -22,33 +22,33 @@ $ usermod -aG sudo tharindu
 #### Install Nxinx
 
 ```sh
-sudo apt-get install nginx -y
-sudo apt-get update && apt-get upgrade
+$ sudo apt-get install nginx -y
+$ sudo apt-get update && apt-get upgrade
 ```
 
 #### Install PerconaDB
 
 ```sh
-wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
-dpkg -i percona-release_latest.bionic_all.deb
-apt-get update && apt-get upgrade
-apt-get install percona-server-server-5.7 -q -y
+$ wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
+$ dpkg -i percona-release_latest.bionic_all.deb
+$ apt-get update && apt-get upgrade
+$ apt-get install percona-server-server-5.7 -q -y
 ```
 
 #### Install PHP7.2 and Modules
 
 ```sh
-wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
-dpkg -i percona-release_latest.bionic_all.deb
-apt-get update && apt-get upgrade
-apt-get install percona-server-server-5.7 -q -y
+$ wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
+$ dpkg -i percona-release_latest.bionic_all.deb
+$ apt-get update && apt-get upgrade
+$ apt-get install percona-server-server-5.7 -q -y
 ```
 
 #### Install PerconaDB
 
 ```sh
-wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
-dpkg -i percona-release_latest.bionic_all.deb
-apt-get update && apt-get upgrade
-apt-get install percona-server-server-5.7 -q -y
+$ wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
+$ dpkg -i percona-release_latest.bionic_all.deb
+$ apt-get update && apt-get upgrade
+$ apt-get install percona-server-server-5.7 -q -y
 ```
