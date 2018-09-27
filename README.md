@@ -3,17 +3,15 @@
 
 ## Components
 
-| Component | Description |
+| Component | Version |
 | :---------- | :----------- |
-| Linux | `php -v` |
-| Nginx | `Admin Footer` |
-| PerconaDB | `Theme Page` |
-| PHP | `composer --version` |
-| Node | `node -v` |
-| NPM | `npm -v` |
-| Yarn | `yarn -v` |
-| Gulp | `gulp -v` |
-| Gulp | `gulp -v` |
+| Linux | Ubuntu 18.04 x64 |
+| Nginx | 1.14.1 |
+| PerconaDB | 5.7 |
+| PHP | php7.2-fpm |
+| Fail2ban | 0.9.7 |
+| Certbot | 0.28.0 |
+| Postfix | 3.3.1 |
 
 ## Initial Server Setup
 
