@@ -18,29 +18,18 @@ WordPress itself has conqured 30% of it's marketplace. WordPress was made as a m
 
 ## Initial Server Setup
 
-#### Login to the server
-```
-ssh root@178.128.156.148
-```
+```bash
+# Login to the server
+$ ssh root@178.128.156.148
 
-#### Login to the server
-```
-ssh root@178.128.156.148
-```
+# Add new user from here
+$ adduser tharindu
 
-Log into your server
-```sh
-ssh root@your_server_ip
-```
+# Add newly created user into group of sudo
+$ usermod -aG sudo tharindu
 
-Add new user from here
-```sh
-adduser tharindu
-```
-
-Add newly created user into group of sudo
-```sh
-usermod -aG sudo tharindu
+# Run the app
+$ npm start
 ```
 
 ## Install Nxinx
