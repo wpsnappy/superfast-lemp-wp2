@@ -1,7 +1,10 @@
 # Superfast LEMP-WP Stack<!-- omit in toc -->
 
+## Table of Contents<!-- omit in toc -->
+
 - [Introduction](#introduction)
 - [Components](#components)
+- [Initial Server Setup](#initial-server-setup)
 - [Initial Server Setup](#initial-server-setup)
 
 ## Introduction
@@ -35,3 +38,6 @@ $ usermod -aG sudo tharindu
 # Run the app
 $ npm start
 ```
+
+## Initial Server Setup
+
