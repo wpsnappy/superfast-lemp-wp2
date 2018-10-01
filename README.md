@@ -5,6 +5,7 @@
 - [Introduction](#introduction)
 - [Components](#components)
 - [Initial Server Setup](#initial-server-setup)
+  - [1. Create a user with superuser privileges](#1-create-a-user-with-superuser-privileges)
 - [Firewall](#firewall)
 
 ## Introduction
@@ -34,6 +35,8 @@ WordPress itself has conqured 30% of it's marketplace. WordPress was made as a m
 | Postfix   | [3.3.1](#)       |
 
 ## Initial Server Setup
+
+### 1. Create a user with superuser privileges
 
 Login to the server using your ip addess. Replace ```root``` with your name and ```178.128.156.148``` with your ip address.
 
