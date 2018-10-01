@@ -107,20 +107,50 @@ sudo ufw status
 
 ## Install Nginx
 
+Nginx packages are available in the default Ubuntu repositories. The installation is pretty straightforward. We’ll start by updating the local package index and then install Nginx:
+
+``` bash
+$ sudo apt update
+$ sudo apt install nginx
+```
+
+Once the installation is completed, Nginx service will start automatically. You can check the status of the service with the following command:
+
+``` bash
+sudo systemctl status nginx
+```
+
+The output will look something like this:
+
+``` bash
+# Output
+● nginx.service - A high performance web server and a reverse proxy server
+   Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sun 2018-04-29 06:43:26 UTC; 8s ago
+     Docs: man:nginx(8)
+  Process: 3091 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+  Process: 3080 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+ Main PID: 3095 (nginx)
+    Tasks: 2 (limit: 507)
+   CGroup: /system.slice/nginx.service
+           ├─3095 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+           └─3097 nginx: worker process
+```
+
 Here's our site structure as per required domins. You will always be able to have a specific location for each website and you can manage each of them individually using Nginx server blocks. As per this tutorial this is the struture I have used.
 
 ``` bash
 /var/www/
 ├── stackpartner.com
-│   └── html
+│   └── public_html
 │   └── cache
 │   └── logs
-├── wpsnappy.com
-│   └── html
+├── hostingexplorer.com
+│   └── public_html
 │   └── cache
 │   └── logs
 ├── wpblogsetup.com
-│   └── html
+│   └── public_html
 │   └── cache
 │   └── logs
 ```
