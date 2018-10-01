@@ -9,6 +9,7 @@
   - [Create User with Superuser Privileges](#create-user-with-superuser-privileges)
   - [Update Ubuntu](#update-ubuntu)
   - [Set up Firewall](#set-up-firewall)
+    - [Enable Firewall](#enable-firewall)
 
 ## Introduction
 
@@ -85,3 +86,27 @@ sudo reboot
 ```
 
 ### Set up Firewall
+
+By default ```ufw``` is disabled. You can check it by running this command.
+
+``` bash
+sudo ufw status
+```
+
+For further details run,
+
+``` bash
+sudo ufw status verbose
+```
+
+#### Enable Firewall
+
+``` bash
+sudo ufw enable
+```
+
+Firewall is now enabled.
+
+``` bash
+sudo ufw status
+```
