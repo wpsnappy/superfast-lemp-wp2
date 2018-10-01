@@ -16,15 +16,6 @@ WordPress itself has conqured 30% of it's marketplace. WordPress was made as a m
 
 ## Components
 
-- [Ubuntu](#) ```18.04 x64```
-- [Nginx](#) ```1.14.1```
-- [PerconaDB](#) ```5.7```
-- [PHP](#) ```7.2-fpm```
-- [Redis](#)
-- [Fail2ban](#) ```0.9.7```
-- [Certbot](#) ```0.28.0```
-- [Postfix](#) ```3.3.1```
-
 | Component | Version          |
 | :-------- | :--------------- |
 | Linux     | Ubuntu 18.04 x64 |
