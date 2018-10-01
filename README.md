@@ -75,6 +75,7 @@ john@178.128.156.148:~$
 
 ``` bash
 $ sudo apt update && sudo apt upgrade
+root@stackpartner:~$ sudo apt autoremove
 ```
 
 Once updated, you may need to reboot the server:
