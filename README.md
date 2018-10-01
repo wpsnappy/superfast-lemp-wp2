@@ -13,7 +13,14 @@
 
 ## Introduction
 
-WordPress itself has conqured 30% of it's marketplace. WordPress was made as a multi purpose CMS platform where most people would find most features not necessary.
+The term LEMP is an acronym of the names of its four open-source components:
+
+- L - Linux operating system
+- E - Nginx [engine x] a HTTP and reverse proxy server
+- M - MySQL or MariaDB relational database management system
+- P - PHP programming language.
+
+This series of tutorials will show you how to install Nginx, create Nginx server blocks, generate a free Let’s Encrypt SSL certificate, install and secure MySQL and install PHP 7.2.
 
 ## Components
 
