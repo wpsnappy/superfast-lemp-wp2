@@ -9,6 +9,7 @@
   - [Create User with Superuser Privileges](#create-user-with-superuser-privileges)
   - [Update Ubuntu](#update-ubuntu)
   - [Set up Firewall](#set-up-firewall)
+- [Install Nginx](#install-nginx)
 
 ## Introduction
 
@@ -89,12 +90,6 @@ sudo reboot
 By default ```ufw``` is disabled. You can check it by running this command.
 
 ``` bash
-sudo ufw status
-```
-
-For further details run,
-
-``` bash
 sudo ufw status verbose
 ```
 
@@ -108,4 +103,24 @@ Firewall is now enabled.
 
 ``` bash
 sudo ufw status
+```
+
+## Install Nginx
+
+Here's our site structure as per required domins. You will always be able to have a specific location for each website and you can manage each of them individually using Nginx server blocks. As per this tutorial this is the struture I have used.
+
+``` bash
+/var/www/
+├── stackpartner.com
+│   └── html
+│   └── cache
+│   └── logs
+├── wpsnappy.com
+│   └── html
+│   └── cache
+│   └── logs
+├── wpblogsetup.com
+│   └── html
+│   └── cache
+│   └── logs
 ```
