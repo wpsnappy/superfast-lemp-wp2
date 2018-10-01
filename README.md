@@ -7,6 +7,7 @@
 - [Initial Server Setup](#initial-server-setup)
   - [Login to the server](#login-to-the-server)
   - [Create a user with superuser privileges](#create-a-user-with-superuser-privileges)
+  - [Update Ubuntu](#update-ubuntu)
 - [Firewall](#firewall)
 
 ## Introduction
@@ -42,7 +43,7 @@ WordPress itself has conqured 30% of it's marketplace. WordPress was made as a m
 Login to the server using your ip addess. Replace ```root``` with your name and ```178.128.156.148``` with your ip address.
 
 ``` bash
-ssh root@178.128.156.148
+$ ssh root@178.128.156.148
 ```
 
 ### Create a user with superuser privileges
@@ -54,19 +55,19 @@ In this example we are going to use the ```adduser``` command to add a new user 
 Add a new non-root sudo user. Replaces ```tharindu``` with your preferred username.
 
 ``` bash
-adduser tharindu
+$ adduser tharindu
 ```
 
 Once the new user is created, give it superuser privileges using the ```usermod``` command. The ```-aG``` parameter means append to Group, and the name of the superuser group is ```sudo```.
 
 ``` bash
-usermod -aG sudo tharindu
+$ usermod -aG sudo tharindu
 ```
 
 We can now switch to our new account john using the su command (substitute user).
 
 ``` bash
-sudo su - tharindu
+$ sudo su - tharindu
 ```
 
 Enter the password you created previously.
@@ -77,6 +78,18 @@ To run a command as administrator (user "root"), use "sudo <command>".
 See "man sudo_root" for details.
 
 john@178.128.156.148:~$
+```
+
+### Update Ubuntu
+
+``` bash
+$ sudo apt update && sudo apt upgrade
+```
+
+Once updated, you may need to reboot the server:
+
+``` bash
+$ sudo reboot
 ```
 
 ## Firewall
