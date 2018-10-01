@@ -5,7 +5,8 @@
 - [Introduction](#introduction)
 - [Components](#components)
 - [Initial Server Setup](#initial-server-setup)
-  - [1. Create a user with superuser privileges](#1-create-a-user-with-superuser-privileges)
+  - [Login to the server](#login-to-the-server)
+  - [Create a user with superuser privileges](#create-a-user-with-superuser-privileges)
 - [Firewall](#firewall)
 
 ## Introduction
@@ -36,13 +37,15 @@ WordPress itself has conqured 30% of it's marketplace. WordPress was made as a m
 
 ## Initial Server Setup
 
-### 1. Create a user with superuser privileges
+### Login to the server
 
 Login to the server using your ip addess. Replace ```root``` with your name and ```178.128.156.148``` with your ip address.
 
 ``` bash
 ssh root@178.128.156.148
 ```
+
+### Create a user with superuser privileges
 
 Add a new non-root sudo user. Replaces ```tharindu``` with your preferred username.
 
