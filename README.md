@@ -47,6 +47,10 @@ ssh root@178.128.156.148
 
 ### Create a user with superuser privileges
 
+The default root user is the administrative user in a Linux environment that has superuser privileges and you are discouraged from using it on a regular basis. For that reason, it is highly recommended that you set up an alternative account under your own name and assign it superuser privileges.
+
+In this example we are going to use the ```adduser``` command to add a new user called **john**. The ```sudo``` command at the beginning means  “superuser do!” and tells Linux to run the ensuing command with elevated superuser privileges, otherwise you may get an access denied error.
+
 Add a new non-root sudo user. Replaces ```tharindu``` with your preferred username.
 
 ``` bash
