@@ -8,7 +8,7 @@
   - [Login to the Server](#login-to-the-server)
   - [Create User with Superuser Privileges](#create-user-with-superuser-privileges)
   - [Update Ubuntu](#update-ubuntu)
-- [Set up Firewall](#set-up-firewall)
+  - [Set up Firewall](#set-up-firewall)
 
 ## Introduction
 
@@ -83,4 +83,4 @@ Once updated, you may need to reboot the server:
 $ sudo reboot
 ```
 
-## Set up Firewall
+### Set up Firewall
