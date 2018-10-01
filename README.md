@@ -31,7 +31,7 @@ WordPress itself has conqured 30% of it's marketplace. WordPress was made as a m
 
 ### Login to the Server
 
-Login to the server using your ip addess. Replace ```root``` with your name and ```178.128.156.148``` with your ip address.
+Login to the server using your ip addess. Replace ```root``` with your username and ```178.128.156.148``` with your ip address.
 
 ``` bash
 ssh root@178.128.156.148
@@ -43,7 +43,7 @@ The default root user is the administrative user in a Linux environment that has
 
 In this example we are going to use the ```adduser``` command to add a new user called **tharindu**. The ```sudo``` command at the beginning means  “superuser do!” and tells Linux to run the ensuing command with elevated superuser privileges, otherwise you may get an access denied error.
 
-Add a new non-root sudo user. Replaces ```tharindu``` with your preferred username.
+Add a new non-root sudo user. Replace ```tharindu``` with your preferred username.
 
 ``` bash
 adduser tharindu
@@ -78,7 +78,7 @@ sudo apt update && sudo apt upgrade
 sudo apt autoremove
 ```
 
-Once updated, you may need to reboot the server:
+Once updated, you may need to run ```reboot``` to reboot the server:
 
 ``` bash
 sudo reboot
