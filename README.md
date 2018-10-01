@@ -5,10 +5,10 @@
 - [Introduction](#introduction)
 - [Components](#components)
 - [Initial Server Setup](#initial-server-setup)
-  - [Login to the server](#login-to-the-server)
-  - [Create a user with superuser privileges](#create-a-user-with-superuser-privileges)
+  - [Login to the Server](#login-to-the-server)
+  - [Create User with Superuser Privileges](#create-user-with-superuser-privileges)
   - [Update Ubuntu](#update-ubuntu)
-- [Firewall](#firewall)
+- [Set up Firewall](#set-up-firewall)
 
 ## Introduction
 
@@ -38,7 +38,7 @@ WordPress itself has conqured 30% of it's marketplace. WordPress was made as a m
 
 ## Initial Server Setup
 
-### Login to the server
+### Login to the Server
 
 Login to the server using your ip addess. Replace ```root``` with your name and ```178.128.156.148``` with your ip address.
 
@@ -46,7 +46,7 @@ Login to the server using your ip addess. Replace ```root``` with your name and 
 $ ssh root@178.128.156.148
 ```
 
-### Create a user with superuser privileges
+### Create User with Superuser Privileges
 
 The default root user is the administrative user in a Linux environment that has superuser privileges and you are discouraged from using it on a regular basis. For that reason, it is highly recommended that you set up an alternative account under your own name and assign it superuser privileges.
 
@@ -92,4 +92,4 @@ Once updated, you may need to reboot the server:
 $ sudo reboot
 ```
 
-## Firewall
+## Set up Firewall
