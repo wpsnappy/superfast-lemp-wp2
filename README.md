@@ -176,7 +176,9 @@ Here's our site structure as per required domins. You will always be able to hav
 Let’s create the root directory for our domain ```stackpartner.com```:
 
 ``` bash
-sudo mkdir -p /var/www/stackpartner.com/public_html && sudo mkdir -p /var/www/stackpartner.com/cache && sudo mkdir -p /var/www/stackpartner.com/logs
+sudo mkdir -p /var/www/stackpartner.com/public_html
+sudo mkdir /var/www/stackpartner.com/cache
+sudo mkdir /var/www/stackpartner.com/logs
 ```
 
 ## Install PHP
