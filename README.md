@@ -161,3 +161,22 @@ Here's our site structure as per required domins. You will always be able to hav
 │   └── cache
 │   └── logs
 ```
+
+## Install PHP
+
+Unlike Apache, Nginx doesn’t have a built in support for processing PHP files so we need to install a separate application such as PHP FPM (“fastCGI process manager”) which will handle PHP files.
+
+To install the PHP and PHP FPM packages run the following command:
+
+``` bash
+sudo apt install php-fpm
+```
+
+Once the packages are installed you can check the status of the PHP FPM service with:
+
+``` bash
+```
+
+## HTTPS/2
+
+## Redis
