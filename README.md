@@ -173,6 +173,8 @@ Here's our site structure as per required domins. You will always be able to hav
 │   └── logs
 ```
 
+In this example I'm gonna be setting up the stack only for ```stackpartner.com``` domain. But you can always add extra Nginx server blocks later so you can host multiple domains.
+
 Let’s create the root directory for our domain ```stackpartner.com```:
 
 ``` bash
