@@ -4,21 +4,25 @@
 
 - [Introduction](#introduction)
 - [Components](#components)
+- [Prerequisites](#prerequisites)
 - [Initial Server Setup](#initial-server-setup)
   - [Login to the Server](#login-to-the-server)
   - [Create User with Superuser Privileges](#create-user-with-superuser-privileges)
   - [Update Ubuntu](#update-ubuntu)
   - [Set up Firewall](#set-up-firewall)
 - [Install Nginx](#install-nginx)
+- [Install PHP](#install-php)
+- [HTTPS/2](#https2)
+- [Redis](#redis)
 
 ## Introduction
 
 The term LEMP is an acronym of the names of its four open-source components:
 
 - L - Linux operating system
-- E - Nginx [engine x] a HTTP and reverse proxy server
+- E - Nginx, a HTTP and reverse proxy server
 - M - MySQL or MariaDB relational database management system
-- P - PHP programming language.
+- P - PHP programming language
 
 This series of tutorials will show you how to install Nginx, create Nginx server blocks, generate a free Let’s Encrypt SSL certificate, install and secure MySQL and install PHP 7.2.
 
@@ -169,9 +173,13 @@ Here's our site structure as per required domins. You will always be able to hav
 │   └── logs
 ```
 
-## Install PHP
+Let’s create the root directory for our domain ```stackpartner.com```:
 
-Unlike Apache, Nginx doesn’t have a built in support for processing PHP files so we need to install a separate application such as PHP FPM (“fastCGI process manager”) which will handle PHP files.
+``` bash
+sudo mkdir -p /var/www/stackpartner.com/public_html && sudo mkdir -p /var/www/stackpartner.com/cache && sudo mkdir -p /var/www/stackpartner.com/logs
+```
+
+## Install PHP
 
 To install the PHP and PHP FPM packages run the following command:
 
