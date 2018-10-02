@@ -35,6 +35,13 @@ This series of tutorials will show you how to install Nginx, create Nginx server
 | Certbot   | [0.28.0](#)      |
 | Postfix   | [3.3.1](#)       |
 
+## Prerequisites
+
+Make sure that you have met the following prerequisites before continuing with this tutorial:
+
+- You have a domain name pointing to your public server IP. In this tutorial we will use ```stackpartner.com```.
+- You are logged in as a user with sudo privileges.
+
 ## Initial Server Setup
 
 ### Login to the Server
@@ -175,6 +182,13 @@ sudo apt install php-fpm
 Once the packages are installed you can check the status of the PHP FPM service with:
 
 ``` bash
+systemctl status php7.2-fpm
+```
+
+Do not forget to restart the Nginx service so that the new configuration take effect:
+
+``` bash
+sudo systemctl restart nginx
 ```
 
 ## HTTPS/2
