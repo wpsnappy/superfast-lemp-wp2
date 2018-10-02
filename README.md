@@ -45,12 +45,13 @@ Set ```PermitRootLogin yes``` to ```PermitRootLogin no``` and ```PasswordAuthent
 sudo nano /etc/ssh/sshd_config
 ```
 
-``` bash
-sudo service ssh restart
-```
+``` diff
+- PermitRootLogin yes
++ PermitRootLogin no
 
-``` bash
-sudo nano /etc/ssh/sshd_config
+- PasswordAuthentication yes
++ PasswordAuthentication no
+
 ```
 
 ``` bash
