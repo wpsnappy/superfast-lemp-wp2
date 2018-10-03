@@ -9,12 +9,12 @@
     - [Login to the Server](#login-to-the-server)
     - [Create User with Superuser Privileges](#create-user-with-superuser-privileges)
     - [Create SSH Credentials](#create-ssh-credentials)
+    - [Secure root login](#secure-root-login)
     - [Update Ubuntu](#update-ubuntu)
 - [Install Nginx](#install-nginx)
     - [Enable `UFW` Firewall](#enable-ufw-firewall)
     - [Install and enable `fail2ban`](#install-and-enable-fail2ban)
 - [Install PHP](#install-php)
-    - [Install Nginx](#install-nginx)
     - [Useful Commands](#useful-commands)
 
 ## Introduction
@@ -51,19 +51,12 @@ nano ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-Set ```PermitRootLogin yes``` to ```PermitRootLogin no``` and ```PasswordAuthentication yes``` to ```PasswordAuthentication no```.
+### Secure root login
 
 ``` bash
 sudo nano /etc/ssh/sshd_config
-```
 
-``` diff
-- PermitRootLogin yes
-+ PermitRootLogin no
-
-- PasswordAuthentication yes
-+ PasswordAuthentication no
-
+# Set 'PermitRootLogin yes' to `PermitRootLogin no` and `PasswordAuthentication yes` to `PasswordAuthentication no`.
 ```
 
 ``` bash
@@ -109,18 +102,16 @@ sudo service fail2ban start
 ## Install PHP
 
 ``` bash
-# Document root
-/var/www/hostingexplorer.com/public_html
-
-# Cache
-/var/www/hostingexplorer.com/cache
-
-# Logs
-/var/www/hostingexplorer.com/logs
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt-get update
+sudo apt-get install php7.2-fpm php7.2-common php7.2-mysql php7.2-xml php7.2-xmlrpc php7.2-curl php7.2-gd php7.2-imagick php7.2-cli php7.2-dev php7.2-imap php7.2-mbstring php7.2-opcache php7.2-redis php7.2-soap php7.2-zip -y
+systemctl status php7.2-fpm
+sudo systemctl restart nginx
 ```
 
-### Install Nginx
-
+``` bash
+sudo sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
+```
 
 Open nginx conf file using this command and edit the followings.
 
@@ -150,17 +141,7 @@ large_client_header_buffers 4 256k;
 
 Install PHP and other modules
 
-``` bash
-sudo add-apt-repository ppa:ondrej/php -y
-sudo apt-get update
-sudo apt-get install php7.2-fpm php7.2-common php7.2-mysql php7.2-xml php7.2-xmlrpc php7.2-curl php7.2-gd php7.2-imagick php7.2-cli php7.2-dev php7.2-imap php7.2-mbstring php7.2-opcache php7.2-redis php7.2-soap php7.2-zip -y
-systemctl status php7.2-fpm
-sudo systemctl restart nginx
-```
 
-``` bash
-sudo sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
-```
 
 ``` bash
 sudo mkdir -p /var/www/hostingexplorer.com/public_html
