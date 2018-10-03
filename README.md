@@ -16,6 +16,7 @@
 - [4. Setup `UFW` Firewall](#4-setup-ufw-firewall)
     - [4.1 Enable `UFW` Firewall](#41-enable-ufw-firewall)
     - [4.2 Install and enable `fail2ban`](#42-install-and-enable-fail2ban)
+- [Configure Nginx Server Blocks](#configure-nginx-server-blocks)
     - [Useful Commands](#useful-commands)
 
 ## Introduction
@@ -79,6 +80,27 @@ sudo apt-get install nginx -y
 sudo systemctl status nginx
 ```
 
+``` bash
+sudo nano /etc/nginx/nginx.conf
+```
+
+``` nginx
+# I have 2 cores
+worker_processes 2;
+
+# multiply number of cores from the output of this command `ulimit -n`
+worker_connections 2048;
+use epoll;
+
+keepalive_timeout 10;
+
+# Add the following lines to the config file
+client_body_buffer_size 128k;
+client_header_buffer_size 10k;
+client_max_body_size 10m;
+large_client_header_buffers 4 256k;
+```
+
 ## 3. Install PHP
 
 ``` bash
@@ -114,35 +136,20 @@ sudo apt-get install fail2ban -y
 sudo service fail2ban start
 ```
 
-Open nginx conf file using this command and edit the followings.
+## Configure Nginx Server Blocks
 
 ``` bash
-sudo nano /etc/nginx/nginx.conf
+/var/www/
+├── hostingexplorer.com
+│   └── public_html
+│   └── cache
+│   └── logs
+├── domain2.com
+│   └── public_html
+│   └── cache
+│   └── logs
+├── html
 ```
-
-Change above files in config file
-
-``` nginx
-
-# I have 2 cores
-worker_processes 2;
-
-# multiply number of cores from the output of this command `ulimit -n`
-worker_connections 2048;
-use epoll;
-
-keepalive_timeout 10;
-
-# Add the following lines to the config file
-client_body_buffer_size 128k;
-client_header_buffer_size 10k;
-client_max_body_size 10m;
-large_client_header_buffers 4 256k;
-```
-
-Install PHP and other modules
-
-
 
 ``` bash
 sudo mkdir -p /var/www/hostingexplorer.com/public_html
@@ -150,19 +157,13 @@ sudo mkdir /var/www/hostingexplorer.com/cache
 sudo mkdir /var/www/hostingexplorer.com/logs
 ```
 
-Change permissions
-
 ``` bash
 sudo chown -R www-data: /var/www/hostingexplorer.com
 ```
 
-Delete the default site configuration provided with the package as an example:
-
 ``` bash
 sudo rm -f /etc/nginx/sites-enabled/default
 ```
-
-Create a file inside sites-available directory
 
 ``` bash
 sudo touch /etc/nginx/sites-available/hostingexplorer.com
