@@ -1,30 +1,5 @@
 # Superfast LEMP-WP Stack<!-- omit in toc -->
 
-## Table of Contents<!-- omit in toc -->
-
-- [Introduction](#introduction)
-- [Components](#components)
-- [Prerequisites](#prerequisites)
-- [Initial Server Setup](#initial-server-setup)
-    - [→ Login to the Server](#%E2%86%92-login-to-the-server)
-    - [→ Create User with Superuser Privileges](#%E2%86%92-create-user-with-superuser-privileges)
-    - [→ Create SSH Credentials](#%E2%86%92-create-ssh-credentials)
-    - [→ Secure root login](#%E2%86%92-secure-root-login)
-    - [→ Update Ubuntu](#%E2%86%92-update-ubuntu)
-- [Install Nginx and Configure](#install-nginx-and-configure)
-    - [→ Install Nginx](#%E2%86%92-install-nginx)
-    - [→ Configure Nginx for Optimum Performance](#%E2%86%92-configure-nginx-for-optimum-performance)
-- [Install PHP](#install-php)
-- [Setup `UFW` Firewall](#setup-ufw-firewall)
-    - [→ Install `UFW` Firewall](#%E2%86%92-install-ufw-firewall)
-    - [→ Install and enable `fail2ban`](#%E2%86%92-install-and-enable-fail2ban)
-- [Configure Nginx Server Blocks](#configure-nginx-server-blocks)
-- [Install MariaDB](#install-mariadb)
-    - [→ Install MariaDB](#%E2%86%92-install-mariadb)
-    - [→ Create Database](#%E2%86%92-create-database)
-- [Install Redis](#install-redis)
-- [Useful Commands](#useful-commands)
-
 ## Introduction
 
 ## Components
@@ -184,7 +159,7 @@ sudo mkdir /var/www/hostingexplorer.com/logs
 ```
 
 ``` bash
-sudo chown -R www-data: /var/www/hostingexplorer.com
+sudo chown -R tharindu: /var/www/hostingexplorer.com
 ```
 
 ``` bash
@@ -192,7 +167,7 @@ sudo rm -f /etc/nginx/sites-enabled/default
 ```
 
 ``` bash
-sudo touch /etc/nginx/sites-available/hostingexplorer.com
+sudo cp /etc/nginx/sites-available/default hostingexplorer.com
 sudo ln -s /etc/nginx/sites-available/hostingexplorer.com /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
@@ -221,12 +196,30 @@ FLUSH PRIVILEGES;
 exit;
 ```
 
+## Install WordPress
+
+``` bash
+cd /tmp
+wget https://wordpress.org/latest.tar.gz
+tar xf latest.tar.gz
+sudo mv /tmp/wordpress/* /var/www/html/hostingexplorer.com/
+```
+
 ## Install Redis
 
 ``` bash
 sudo apt-get install redis-server
 ```
 
+## HTTPS and HTTPS/2
+
+``` bash
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install python-certbot-nginx
+sudo certbot --nginx
+```
+
 ## Useful Commands
 
-Copy remote file content ```ssh tharindu@142.93.200.70  "cat /etc/nginx/nginx.conf"|pbcopy```
+Copy remote file content ```ssh tharindu@142.93.200.70  "cat /etc/nginx/sites-available/hostingexplorer.com"|pbcopy```
