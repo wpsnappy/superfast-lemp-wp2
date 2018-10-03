@@ -13,17 +13,25 @@
 
 ## Initial Server Setup
 
+Login to the server
+
 ``` bash
 ssh root@142.93.200.70
 ```
+
+Add new user
 
 ``` bash
 adduser tharindu
 ```
 
+Add newly created user to the sudoers groups
+
 ``` bash
 usermod -aG sudo tharindu
 ```
+
+Login to the newly created user as sudo
 
 ``` bash
 sudo su - tharindu
@@ -71,6 +79,12 @@ sudo service ssh restart
 
 Reboot the server
 
+``` bas
+sudo reboot
+```
+
+Update the server
+
 ``` bash
 sudo apt update && sudo apt upgrade -y
 sudo apt autoremove -y
@@ -84,7 +98,11 @@ sudo add-apt-repository ppa:nginx/development -y
 sudo apt-get update
 sudo apt-get install nginx -y
 sudo systemctl status nginx
+```
 
+Setup the UFW firewall
+
+``` bash
 sudo apt-get install ufw
 sudo ufw app list
 sudo ufw allow OpenSSH 
@@ -92,6 +110,13 @@ sudo ufw allow 'Nginx Full'
 sudo ufw show added
 sudo ufw enable
 sudo ufw status verbose
+```
+
+Install fail2ban
+
+``` bash
+sudo apt-get install fail2ban -y
+sudo service fail2ban start
 ```
 
 Open nginx conf file using this command and edit the followings.
@@ -109,6 +134,7 @@ worker_processes 2;
 
 # multiply number of cores from the output of this command `ulimit -n`
 worker_connections 2048;
+use epoll;
 
 keepalive_timeout 10;
 
@@ -119,10 +145,7 @@ client_max_body_size 10m;
 large_client_header_buffers 4 256k;
 ```
 
-``` bash
-sudo apt-get install fail2ban -y
-sudo service fail2ban start
-```
+Install PHP and other modules
 
 ``` bash
 sudo add-apt-repository ppa:ondrej/php -y
