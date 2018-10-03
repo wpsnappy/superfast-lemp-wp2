@@ -1,6 +1,6 @@
 # Superfast LEMP-WP Stack
 
-```
+``` bash
 # Document root
 /var/www/hostingexplorer.com/public_html
 
@@ -153,6 +153,38 @@ sudo apt-get update
 sudo apt-get install php7.2-fpm php7.2-common php7.2-mysql php7.2-xml php7.2-xmlrpc php7.2-curl php7.2-gd php7.2-imagick php7.2-cli php7.2-dev php7.2-imap php7.2-mbstring php7.2-opcache php7.2-redis php7.2-soap php7.2-zip -y
 systemctl status php7.2-fpm
 sudo systemctl restart nginx
+```
+
+Tell PHP to only accept URIs for files that actually exist on the server. This mitigates a security vulnerability where the PHP interpreter can be tricked into allowing arbitrary code execution if the requested .php file is not present in the filesystem.
+
+``` bash
+sudo sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
+```
+
+Create a root directory where the site’s content will live. Replace `hostingexplorer.com` with your site’s domain.
+
+``` bash
+sudo mkdir -p /var/www/hostingexplorer.com/public_html
+sudo mkdir /var/www/hostingexplorer.com/cache
+sudo mkdir /var/www/hostingexplorer.com/logs
+```
+
+Change permissions
+
+``` bash
+sudo chown -R www-data: /var/www/hostingexplorer.com
+```
+
+Delete the default site configuration provided with the package as an example:
+
+``` bash
+sudo rm -f /etc/nginx/sites-enabled/default
+```
+
+Create a file inside sites-available directory
+
+``` bash
+sudo touch /etc/nginx/sites-available/hostingexplorer.com
 ```
 
 ### Useful Commands
