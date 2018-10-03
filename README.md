@@ -12,7 +12,7 @@
     - [Update Ubuntu](#update-ubuntu)
 - [Install Nginx](#install-nginx)
     - [Enable `UFW` Firewall](#enable-ufw-firewall)
-    - [Install and enable Fail2ban](#install-and-enable-fail2ban)
+    - [Install and enable `fail2ban`](#install-and-enable-fail2ban)
 - [Install PHP](#install-php)
     - [Install Nginx](#install-nginx)
     - [Useful Commands](#useful-commands)
@@ -21,29 +21,11 @@
 
 ## Components
 
-| Component | Version          |
-| :-------- | :--------------- |
-| Linux     | Ubuntu 18.04 x64 |
-| Nginx     | [1.14.1](#)      |
-| PerconaDB | [5.7](#)         |
-| PHP       | [php7.2-fpm](#)  |
-| Redis     | [Na](#)          |
-| Fail2ban  | [0.9.7](#)       |
-| Certbot   | [0.28.0](#)      |
-| Postfix   | [3.3.1](#)       |
-
 ## Prerequisites
-
-Make sure that you have met the following prerequisites before continuing with this tutorial:
-
-- You have a domain name pointing to your public server IP. In this tutorial we will use ```stackpartner.com```.
-- You are logged in as a user with sudo privileges.
 
 ## Initial Server Setup
 
 ### Login to the Server
-
-Login to the server using your ip addess. Replace ```root``` with your username and ```178.128.156.148``` with your ip address.
 
 ``` bash
 ssh root@142.93.200.70
@@ -51,25 +33,9 @@ ssh root@142.93.200.70
 
 ### Create User with Superuser Privileges
 
-The default root user is the administrative user in a Linux environment that has superuser privileges and you are discouraged from using it on a regular basis. For that reason, it is highly recommended that you set up an alternative account under your own name and assign it superuser privileges.
-
-In this example we are going to use the ```adduser``` command to add a new user called **tharindu**. The ```sudo``` command at the beginning means  “superuser do!” and tells Linux to run the ensuing command with elevated superuser privileges, otherwise you may get an access denied error.
-
-Add a new non-root sudo user. Replace ```tharindu``` with your preferred username.
-
 ``` bash
 adduser tharindu
-```
-
-Once the new user is created, give it superuser privileges using the ```usermod``` command. The ```-aG``` parameter means append to Group, and the name of the superuser group is ```sudo```.
-
-``` bash
 usermod -aG sudo tharindu
-```
-
-We can now switch to our new account john using the su command (substitute user).
-
-``` bash
 sudo su - tharindu
 ```
 
@@ -77,22 +43,11 @@ sudo su - tharindu
 
 ``` bash
 mkdir ~/.ssh
-```
-
-``` bash
 chmod 700 ~/.ssh
-```
-
-``` bash
 nano ~/.ssh/authorized_keys
-```
 
-``` bash
-# pbcopy < ~/.ssh/id_rsa.pub
-# paste
-```
+# Paste the contents from pbcopy < ~/.ssh/id_rsa.pub
 
-``` bash
 chmod 600 ~/.ssh/authorized_keys
 ```
 
@@ -113,12 +68,6 @@ sudo nano /etc/ssh/sshd_config
 
 ``` bash
 sudo service ssh restart
-```
-
-Reboot the server as you may need it
-
-``` bash
-sudo reboot
 ```
 
 ### Update Ubuntu
@@ -150,7 +99,7 @@ sudo ufw enable
 sudo ufw status verbose
 ```
 
-### Install and enable Fail2ban
+### Install and enable `fail2ban`
 
 ``` bash
 sudo apt-get install fail2ban -y
@@ -209,13 +158,9 @@ systemctl status php7.2-fpm
 sudo systemctl restart nginx
 ```
 
-Tell PHP to only accept URIs for files that actually exist on the server. This mitigates a security vulnerability where the PHP interpreter can be tricked into allowing arbitrary code execution if the requested .php file is not present in the filesystem.
-
 ``` bash
 sudo sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
 ```
-
-Create a root directory where the site’s content will live. Replace `hostingexplorer.com` with your site’s domain.
 
 ``` bash
 sudo mkdir -p /var/www/hostingexplorer.com/public_html
