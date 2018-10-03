@@ -5,19 +5,19 @@
 - [Introduction](#introduction)
 - [Components](#components)
 - [Prerequisites](#prerequisites)
-- [1. Initial Server Setup](#1-initial-server-setup)
-    - [1.1 Login to the Server](#11-login-to-the-server)
-    - [1.2 Create User with Superuser Privileges](#12-create-user-with-superuser-privileges)
-    - [1.3 Create SSH Credentials](#13-create-ssh-credentials)
-    - [1.4 Secure root login](#14-secure-root-login)
-    - [1.5 Update Ubuntu](#15-update-ubuntu)
-- [2. Install Nginx](#2-install-nginx)
-- [3. Install PHP](#3-install-php)
-- [4. Setup `UFW` Firewall](#4-setup-ufw-firewall)
-    - [4.1 Enable `UFW` Firewall](#41-enable-ufw-firewall)
-    - [4.2 Install and enable `fail2ban`](#42-install-and-enable-fail2ban)
+- [Initial Server Setup](#initial-server-setup)
+    - [`→` Login to the Server](#%E2%86%92-login-to-the-server)
+    - [→ Create User with Superuser Privileges](#%E2%86%92-create-user-with-superuser-privileges)
+    - [Create SSH Credentials](#create-ssh-credentials)
+    - [Secure root login](#secure-root-login)
+    - [Update Ubuntu](#update-ubuntu)
+- [Install Nginx](#install-nginx)
+- [Install PHP](#install-php)
+- [Setup `UFW` Firewall](#setup-ufw-firewall)
+    - [Enable `UFW` Firewall](#enable-ufw-firewall)
+    - [Install and enable `fail2ban`](#install-and-enable-fail2ban)
 - [Configure Nginx Server Blocks](#configure-nginx-server-blocks)
-    - [Useful Commands](#useful-commands)
+- [Useful Commands](#useful-commands)
 
 ## Introduction
 
@@ -25,15 +25,15 @@
 
 ## Prerequisites
 
-## 1. Initial Server Setup
+## Initial Server Setup
 
-### 1.1 Login to the Server
+### `→` Login to the Server
 
 ``` bash
 ssh root@142.93.200.70
 ```
 
-### 1.2 Create User with Superuser Privileges
+### → Create User with Superuser Privileges
 
 ``` bash
 adduser tharindu
@@ -41,7 +41,7 @@ usermod -aG sudo tharindu
 sudo su - tharindu
 ```
 
-### 1.3 Create SSH Credentials
+### Create SSH Credentials
 
 ``` bash
 mkdir ~/.ssh
@@ -53,7 +53,7 @@ nano ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-### 1.4 Secure root login
+### Secure root login
 
 ``` bash
 sudo nano /etc/ssh/sshd_config
@@ -63,7 +63,7 @@ sudo nano /etc/ssh/sshd_config
 sudo service ssh restart
 ```
 
-### 1.5 Update Ubuntu
+### Update Ubuntu
 
 ``` bash
 sudo apt update && sudo apt upgrade -y
@@ -71,7 +71,7 @@ sudo apt autoremove -y
 sudo reboot
 ```
 
-## 2. Install Nginx
+## Install Nginx
 
 ``` bash
 sudo add-apt-repository ppa:nginx/development -y
@@ -101,7 +101,7 @@ client_max_body_size 10m;
 large_client_header_buffers 4 256k;
 ```
 
-## 3. Install PHP
+## Install PHP
 
 ``` bash
 sudo add-apt-repository ppa:ondrej/php -y
@@ -115,9 +115,9 @@ sudo systemctl restart nginx
 sudo sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
 ```
 
-## 4. Setup `UFW` Firewall
+## Setup `UFW` Firewall
 
-### 4.1 Enable `UFW` Firewall
+### Enable `UFW` Firewall
 
 ``` bash
 sudo apt-get install ufw
@@ -129,7 +129,7 @@ sudo ufw enable
 sudo ufw status verbose
 ```
 
-### 4.2 Install and enable `fail2ban`
+### Install and enable `fail2ban`
 
 ``` bash
 sudo apt-get install fail2ban -y
@@ -169,6 +169,6 @@ sudo rm -f /etc/nginx/sites-enabled/default
 sudo touch /etc/nginx/sites-available/hostingexplorer.com
 ```
 
-### Useful Commands
+## Useful Commands
 
 Copy remote file content ```ssh tharindu@142.93.200.70  "cat /etc/nginx/nginx.conf"|pbcopy```
