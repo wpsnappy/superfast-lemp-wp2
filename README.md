@@ -6,6 +6,11 @@
 - [Components](#components)
 - [Prerequisites](#prerequisites)
 - [Initial Server Setup](#initial-server-setup)
+    - [Login to the Server](#login-to-the-server)
+    - [Create User with Superuser Privileges](#create-user-with-superuser-privileges)
+    - [Update Ubuntu](#update-ubuntu)
+- [Install Nginx](#install-nginx)
+- [Install PHP](#install-php)
 - [Initial Server Setup](#initial-server-setup)
     - [Install Nginx](#install-nginx)
     - [Useful Commands](#useful-commands)
@@ -14,10 +19,63 @@
 
 ## Components
 
+| Component | Version          |
+| :-------- | :--------------- |
+| Linux     | Ubuntu 18.04 x64 |
+| Nginx     | [1.14.1](#)      |
+| PerconaDB | [5.7](#)         |
+| PHP       | [php7.2-fpm](#)  |
+| Redis     | [Na](#)          |
+| Fail2ban  | [0.9.7](#)       |
+| Certbot   | [0.28.0](#)      |
+| Postfix   | [3.3.1](#)       |
+
 ## Prerequisites
+
+Make sure that you have met the following prerequisites before continuing with this tutorial:
+
+- You have a domain name pointing to your public server IP. In this tutorial we will use ```stackpartner.com```.
+- You are logged in as a user with sudo privileges.
 
 ## Initial Server Setup
 
+### Login to the Server
+
+Login to the server using your ip addess. Replace ```root``` with your username and ```178.128.156.148``` with your ip address.
+
+``` bash
+ssh root@142.93.200.70
+```
+
+### Create User with Superuser Privileges
+
+The default root user is the administrative user in a Linux environment that has superuser privileges and you are discouraged from using it on a regular basis. For that reason, it is highly recommended that you set up an alternative account under your own name and assign it superuser privileges.
+
+In this example we are going to use the ```adduser``` command to add a new user called **tharindu**. The ```sudo``` command at the beginning means  “superuser do!” and tells Linux to run the ensuing command with elevated superuser privileges, otherwise you may get an access denied error.
+
+Add a new non-root sudo user. Replace ```tharindu``` with your preferred username.
+
+``` bash
+adduser tharindu
+```
+
+Once the new user is created, give it superuser privileges using the ```usermod``` command. The ```-aG``` parameter means append to Group, and the name of the superuser group is ```sudo```.
+
+``` bash
+usermod -aG sudo tharindu
+```
+
+We can now switch to our new account john using the su command (substitute user).
+
+``` bash
+sudo su - tharindu
+```
+
+### Update Ubuntu
+
+## Install Nginx
+
+## Install PHP
 
 ``` bash
 # Document root
@@ -31,30 +89,6 @@
 ```
 
 ## Initial Server Setup
-
-Login to the server
-
-``` bash
-ssh root@142.93.200.70
-```
-
-Add new user
-
-``` bash
-adduser tharindu
-```
-
-Add newly created user to the sudoers groups
-
-``` bash
-usermod -aG sudo tharindu
-```
-
-Login to the newly created user as sudo
-
-``` bash
-sudo su - tharindu
-```
 
 ``` bash
 mkdir ~/.ssh
