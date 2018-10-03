@@ -98,8 +98,11 @@ Open nginx conf file using this command and edit the followings.
 
 ``` bash
 sudo nano /etc/nginx/nginx.conf
+```
 
-# Change above files in config file
+Change above files in config file
+
+``` nginx
 
 # I have 2 cores
 worker_processes 2;
