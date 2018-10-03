@@ -8,10 +8,12 @@
 - [Initial Server Setup](#initial-server-setup)
     - [Login to the Server](#login-to-the-server)
     - [Create User with Superuser Privileges](#create-user-with-superuser-privileges)
+    - [Create SSH Credentials](#create-ssh-credentials)
     - [Update Ubuntu](#update-ubuntu)
 - [Install Nginx](#install-nginx)
+    - [Enable `UFW` Firewall](#enable-ufw-firewall)
+    - [Install and enable Fail2ban](#install-and-enable-fail2ban)
 - [Install PHP](#install-php)
-- [Initial Server Setup](#initial-server-setup)
     - [Install Nginx](#install-nginx)
     - [Useful Commands](#useful-commands)
 
@@ -71,24 +73,7 @@ We can now switch to our new account john using the su command (substitute user)
 sudo su - tharindu
 ```
 
-### Update Ubuntu
-
-## Install Nginx
-
-## Install PHP
-
-``` bash
-# Document root
-/var/www/hostingexplorer.com/public_html
-
-# Cache
-/var/www/hostingexplorer.com/cache
-
-# Logs
-/var/www/hostingexplorer.com/logs
-```
-
-## Initial Server Setup
+### Create SSH Credentials
 
 ``` bash
 mkdir ~/.ssh
@@ -130,13 +115,13 @@ sudo nano /etc/ssh/sshd_config
 sudo service ssh restart
 ```
 
-Reboot the server
+Reboot the server as you may need it
 
-``` bas
+``` bash
 sudo reboot
 ```
 
-Update the server
+### Update Ubuntu
 
 ``` bash
 sudo apt update && sudo apt upgrade -y
@@ -144,7 +129,7 @@ sudo apt autoremove -y
 sudo reboot
 ```
 
-### Install Nginx
+## Install Nginx
 
 ``` bash
 sudo add-apt-repository ppa:nginx/development -y
@@ -153,7 +138,7 @@ sudo apt-get install nginx -y
 sudo systemctl status nginx
 ```
 
-Setup the UFW firewall
+### Enable `UFW` Firewall
 
 ``` bash
 sudo apt-get install ufw
@@ -165,12 +150,28 @@ sudo ufw enable
 sudo ufw status verbose
 ```
 
-Install fail2ban
+### Install and enable Fail2ban
 
 ``` bash
 sudo apt-get install fail2ban -y
 sudo service fail2ban start
 ```
+
+## Install PHP
+
+``` bash
+# Document root
+/var/www/hostingexplorer.com/public_html
+
+# Cache
+/var/www/hostingexplorer.com/cache
+
+# Logs
+/var/www/hostingexplorer.com/logs
+```
+
+### Install Nginx
+
 
 Open nginx conf file using this command and edit the followings.
 
