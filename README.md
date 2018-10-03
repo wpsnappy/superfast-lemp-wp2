@@ -11,12 +11,18 @@
     - [→ Create SSH Credentials](#%E2%86%92-create-ssh-credentials)
     - [→ Secure root login](#%E2%86%92-secure-root-login)
     - [→ Update Ubuntu](#%E2%86%92-update-ubuntu)
-- [Install Nginx](#install-nginx)
+- [Install Nginx and Configure](#install-nginx-and-configure)
+    - [→ Install Nginx](#%E2%86%92-install-nginx)
+    - [→ Configure Nginx for Optimum Performance](#%E2%86%92-configure-nginx-for-optimum-performance)
 - [Install PHP](#install-php)
 - [Setup `UFW` Firewall](#setup-ufw-firewall)
-    - [→ Enable `UFW` Firewall](#%E2%86%92-enable-ufw-firewall)
+    - [→ Install `UFW` Firewall](#%E2%86%92-install-ufw-firewall)
     - [→ Install and enable `fail2ban`](#%E2%86%92-install-and-enable-fail2ban)
 - [Configure Nginx Server Blocks](#configure-nginx-server-blocks)
+- [Install MariaDB](#install-mariadb)
+    - [→ Install MariaDB](#%E2%86%92-install-mariadb)
+    - [→ Create Database](#%E2%86%92-create-database)
+- [Install Redis](#install-redis)
 - [Useful Commands](#useful-commands)
 
 ## Introduction
@@ -71,7 +77,9 @@ sudo apt autoremove -y
 sudo reboot
 ```
 
-## Install Nginx
+## Install Nginx and Configure
+
+### → Install Nginx
 
 ``` bash
 sudo add-apt-repository ppa:nginx/development -y
@@ -80,12 +88,14 @@ sudo apt-get install nginx -y
 sudo systemctl status nginx
 ```
 
+### → Configure Nginx for Optimum Performance
+
 ``` bash
 sudo nano /etc/nginx/nginx.conf
 ```
 
 ``` nginx
-# I have 2 cores
+# Change number 2 to match with the number of cores you have
 worker_processes 2;
 
 # multiply number of cores from the output of this command `ulimit -n`
@@ -93,6 +103,10 @@ worker_connections 2048;
 use epoll;
 
 keepalive_timeout 10;
+
+# uncomment this line and set to off
+server_tokens off;
+client_max_body_size 64m;
 
 # Add the following lines to the config file
 client_body_buffer_size 128k;
@@ -115,9 +129,21 @@ sudo systemctl restart nginx
 sudo sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
 ```
 
+``` bash
+sudo nano /etc/php/7.2/fpm/php.ini
+
+# Add these following items to match 'client_max_body_size 64m'
+
+# upload_max_filesize = 64M
+# post_max_size = 64M
+
+sudo php-fpm7.2 -t
+sudo service php7.2-fpm restart
+```
+
 ## Setup `UFW` Firewall
 
-### → Enable `UFW` Firewall
+### → Install `UFW` Firewall
 
 ``` bash
 sudo apt-get install ufw
@@ -167,6 +193,38 @@ sudo rm -f /etc/nginx/sites-enabled/default
 
 ``` bash
 sudo touch /etc/nginx/sites-available/hostingexplorer.com
+sudo ln -s /etc/nginx/sites-available/hostingexplorer.com /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+## Install MariaDB
+
+### → Install MariaDB
+
+``` bash
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://suro.ubaya.ac.id/mariadb/repo/10.3/ubuntu bionic main'
+sudo apt update
+sudo apt install mariadb-server
+sudo systemctl status mariadb
+sudo mysql_secure_installation
+```
+
+### → Create Database
+
+``` sql
+CREATE DATABASE h0571n63xpl0r3r CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;
+CREATE USER 'h0571n6u'@'localhost' IDENTIFIED BY '#cu9yVlFSwZu&KHg1o*6';
+GRANT ALL PRIVILEGES ON h0571n63xpl0r3r.* TO 'h0571n6u'@'localhost';
+FLUSH PRIVILEGES;
+exit;
+```
+
+## Install Redis
+
+``` bash
+sudo apt-get install redis-server
 ```
 
 ## Useful Commands
