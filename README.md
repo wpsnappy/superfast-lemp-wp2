@@ -1,4 +1,23 @@
-# Superfast LEMP-WP Stack
+# Superfast LEMP-WP Stack<!-- omit in toc -->
+
+## Table of Contents<!-- omit in toc -->
+
+- [Introduction](#introduction)
+- [Components](#components)
+- [Prerequisites](#prerequisites)
+- [Initial Server Setup](#initial-server-setup)
+- [Initial Server Setup](#initial-server-setup)
+    - [Install Nginx](#install-nginx)
+    - [Useful Commands](#useful-commands)
+
+## Introduction
+
+## Components
+
+## Prerequisites
+
+## Initial Server Setup
+
 
 ``` bash
 # Document root
