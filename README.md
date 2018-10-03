@@ -100,8 +100,14 @@ Open nginx conf file using this command and edit the followings.
 sudo nano /etc/nginx/nginx.conf
 
 # Change above files in config file
-keepalive_timeout 10;
 
+# I have 2 cores
+worker_processes 2;
+
+# multiply number of cores from the output of this command `ulimit -n`
+worker_connections 2048;
+
+keepalive_timeout 10;
 
 # Add the following lines to the config file
 client_body_buffer_size 128k;
@@ -122,3 +128,7 @@ sudo apt-get install php7.2-fpm php7.2-common php7.2-mysql php7.2-xml php7.2-xml
 systemctl status php7.2-fpm
 sudo systemctl restart nginx
 ```
+
+### Useful Commands
+
+Copy remote file content ```ssh tharindu@142.93.200.70  "cat /etc/nginx/nginx.conf"|pbcopy```
