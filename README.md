@@ -5,16 +5,17 @@
 - [Introduction](#introduction)
 - [Components](#components)
 - [Prerequisites](#prerequisites)
-- [Initial Server Setup](#initial-server-setup)
-    - [Login to the Server](#login-to-the-server)
-    - [Create User with Superuser Privileges](#create-user-with-superuser-privileges)
-    - [Create SSH Credentials](#create-ssh-credentials)
-    - [Secure root login](#secure-root-login)
-    - [Update Ubuntu](#update-ubuntu)
-- [Install Nginx](#install-nginx)
-    - [Enable `UFW` Firewall](#enable-ufw-firewall)
-    - [Install and enable `fail2ban`](#install-and-enable-fail2ban)
-- [Install PHP](#install-php)
+- [1. Initial Server Setup](#1-initial-server-setup)
+    - [1.1 Login to the Server](#11-login-to-the-server)
+    - [1.2 Create User with Superuser Privileges](#12-create-user-with-superuser-privileges)
+    - [1.3 Create SSH Credentials](#13-create-ssh-credentials)
+    - [1.4 Secure root login](#14-secure-root-login)
+    - [1.5 Update Ubuntu](#15-update-ubuntu)
+- [2. Install Nginx](#2-install-nginx)
+- [3. Install PHP](#3-install-php)
+- [4. Setup `UFW` Firewall](#4-setup-ufw-firewall)
+    - [4.1 Enable `UFW` Firewall](#41-enable-ufw-firewall)
+    - [4.2 Install and enable `fail2ban`](#42-install-and-enable-fail2ban)
     - [Useful Commands](#useful-commands)
 
 ## Introduction
@@ -23,15 +24,15 @@
 
 ## Prerequisites
 
-## Initial Server Setup
+## 1. Initial Server Setup
 
-### Login to the Server
+### 1.1 Login to the Server
 
 ``` bash
 ssh root@142.93.200.70
 ```
 
-### Create User with Superuser Privileges
+### 1.2 Create User with Superuser Privileges
 
 ``` bash
 adduser tharindu
@@ -39,7 +40,7 @@ usermod -aG sudo tharindu
 sudo su - tharindu
 ```
 
-### Create SSH Credentials
+### 1.3 Create SSH Credentials
 
 ``` bash
 mkdir ~/.ssh
@@ -51,19 +52,17 @@ nano ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-### Secure root login
+### 1.4 Secure root login
 
 ``` bash
 sudo nano /etc/ssh/sshd_config
 
 # Set 'PermitRootLogin yes' to `PermitRootLogin no` and `PasswordAuthentication yes` to `PasswordAuthentication no`.
-```
 
-``` bash
 sudo service ssh restart
 ```
 
-### Update Ubuntu
+### 1.5 Update Ubuntu
 
 ``` bash
 sudo apt update && sudo apt upgrade -y
@@ -71,7 +70,7 @@ sudo apt autoremove -y
 sudo reboot
 ```
 
-## Install Nginx
+## 2. Install Nginx
 
 ``` bash
 sudo add-apt-repository ppa:nginx/development -y
@@ -80,26 +79,7 @@ sudo apt-get install nginx -y
 sudo systemctl status nginx
 ```
 
-### Enable `UFW` Firewall
-
-``` bash
-sudo apt-get install ufw
-sudo ufw app list
-sudo ufw allow OpenSSH 
-sudo ufw allow 'Nginx Full'
-sudo ufw show added
-sudo ufw enable
-sudo ufw status verbose
-```
-
-### Install and enable `fail2ban`
-
-``` bash
-sudo apt-get install fail2ban -y
-sudo service fail2ban start
-```
-
-## Install PHP
+## 3. Install PHP
 
 ``` bash
 sudo add-apt-repository ppa:ondrej/php -y
@@ -111,6 +91,27 @@ sudo systemctl restart nginx
 
 ``` bash
 sudo sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
+```
+
+## 4. Setup `UFW` Firewall
+
+### 4.1 Enable `UFW` Firewall
+
+``` bash
+sudo apt-get install ufw
+sudo ufw app list
+sudo ufw allow OpenSSH 
+sudo ufw allow 'Nginx Full'
+sudo ufw show added
+sudo ufw enable
+sudo ufw status verbose
+```
+
+### 4.2 Install and enable `fail2ban`
+
+``` bash
+sudo apt-get install fail2ban -y
+sudo service fail2ban start
 ```
 
 Open nginx conf file using this command and edit the followings.
