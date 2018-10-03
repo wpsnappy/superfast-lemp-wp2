@@ -6,16 +6,16 @@
 - [Components](#components)
 - [Prerequisites](#prerequisites)
 - [Initial Server Setup](#initial-server-setup)
-    - [`→` Login to the Server](#%E2%86%92-login-to-the-server)
+    - [→ Login to the Server](#%E2%86%92-login-to-the-server)
     - [→ Create User with Superuser Privileges](#%E2%86%92-create-user-with-superuser-privileges)
-    - [Create SSH Credentials](#create-ssh-credentials)
-    - [Secure root login](#secure-root-login)
-    - [Update Ubuntu](#update-ubuntu)
+    - [→ Create SSH Credentials](#%E2%86%92-create-ssh-credentials)
+    - [→ Secure root login](#%E2%86%92-secure-root-login)
+    - [→ Update Ubuntu](#%E2%86%92-update-ubuntu)
 - [Install Nginx](#install-nginx)
 - [Install PHP](#install-php)
 - [Setup `UFW` Firewall](#setup-ufw-firewall)
-    - [Enable `UFW` Firewall](#enable-ufw-firewall)
-    - [Install and enable `fail2ban`](#install-and-enable-fail2ban)
+    - [→ Enable `UFW` Firewall](#%E2%86%92-enable-ufw-firewall)
+    - [→ Install and enable `fail2ban`](#%E2%86%92-install-and-enable-fail2ban)
 - [Configure Nginx Server Blocks](#configure-nginx-server-blocks)
 - [Useful Commands](#useful-commands)
 
@@ -27,7 +27,7 @@
 
 ## Initial Server Setup
 
-### `→` Login to the Server
+### → Login to the Server
 
 ``` bash
 ssh root@142.93.200.70
@@ -41,7 +41,7 @@ usermod -aG sudo tharindu
 sudo su - tharindu
 ```
 
-### Create SSH Credentials
+### → Create SSH Credentials
 
 ``` bash
 mkdir ~/.ssh
@@ -53,7 +53,7 @@ nano ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-### Secure root login
+### → Secure root login
 
 ``` bash
 sudo nano /etc/ssh/sshd_config
@@ -63,7 +63,7 @@ sudo nano /etc/ssh/sshd_config
 sudo service ssh restart
 ```
 
-### Update Ubuntu
+### → Update Ubuntu
 
 ``` bash
 sudo apt update && sudo apt upgrade -y
@@ -117,7 +117,7 @@ sudo sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.in
 
 ## Setup `UFW` Firewall
 
-### Enable `UFW` Firewall
+### → Enable `UFW` Firewall
 
 ``` bash
 sudo apt-get install ufw
@@ -129,7 +129,7 @@ sudo ufw enable
 sudo ufw status verbose
 ```
 
-### Install and enable `fail2ban`
+### → Install and enable `fail2ban`
 
 ``` bash
 sudo apt-get install fail2ban -y
