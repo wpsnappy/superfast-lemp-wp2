@@ -298,6 +298,7 @@ server {
   listen [::]:80;
   listen 443 ssl;
   listen [::]:443 ssl;
+  
   server_name hostingexplorer.com;
   return 301 https://www.$server_name$request_uri;
 }
