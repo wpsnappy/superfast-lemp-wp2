@@ -167,7 +167,8 @@ sudo rm -f /etc/nginx/sites-enabled/default
 ```
 
 ``` bash
-sudo cp /etc/nginx/sites-available/default hostingexplorer.com
+cd /etc/nginx/sites-available
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/hostingexplorer.com
 sudo ln -s /etc/nginx/sites-available/hostingexplorer.com /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
@@ -189,6 +190,7 @@ sudo mysql_secure_installation
 ### → Create Database
 
 ``` sql
+mysql -u root -p
 CREATE DATABASE h0571n63xpl0r3r CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;
 CREATE USER 'h0571n6u'@'localhost' IDENTIFIED BY '#cu9yVlFSwZu&KHg1o*6';
 GRANT ALL PRIVILEGES ON h0571n63xpl0r3r.* TO 'h0571n6u'@'localhost';
@@ -202,7 +204,7 @@ exit;
 cd /tmp
 wget https://wordpress.org/latest.tar.gz
 tar xf latest.tar.gz
-sudo mv /tmp/wordpress/* /var/www/html/hostingexplorer.com/
+sudo mv /tmp/wordpress/* /var/www/hostingexplorer.com/public_html
 ```
 
 ## Install Redis
@@ -211,15 +213,29 @@ sudo mv /tmp/wordpress/* /var/www/html/hostingexplorer.com/
 sudo apt-get install redis-server
 ```
 
+``` bash
+sudo nano /etc/nginx/sites-available/hostingexplorer.com
+
+# Add 'fastcgi_cache_path /var/www/hostingexplorer.com/cache levels=1:2 keys_zone=hostingexplorer.com:100m inactive=60m;' before the server block
+```
+
 ## HTTPS and HTTPS/2
 
 ``` bash
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get update
 sudo apt-get install python-certbot-nginx
-sudo certbot --nginx
+sudo certbot --nginx certonly
+```
+
+``` nginx
+# Add these lines into /etc/nginx/sites-available/hostingexplorer.com
+
+ssl_certificate /etc/letsencrypt/live/hostingexplorer.com/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/hostingexplorer.com/privkey.pem;
+
 ```
 
 ## Useful Commands
 
-Copy remote file content ```ssh tharindu@142.93.200.70  "cat /etc/nginx/sites-available/hostingexplorer.com"|pbcopy```
+Copy remote file content ```ssh tharindu@206.189.203.233  "cat /etc/nginx/sites-available/hostingexplorer.com"|pbcopy```
