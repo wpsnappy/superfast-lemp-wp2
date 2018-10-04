@@ -228,14 +228,22 @@ sudo apt-get install python-certbot-nginx
 sudo certbot --nginx certonly
 ```
 
-``` nginx
-# Add these lines into /etc/nginx/sites-available/hostingexplorer.com
+``` bash
+sudo nano /etc/nginx/sites-available/hostingexplorer.com
+```
 
+Add these lines below server name. Replace `hostingexplorer.com` to match your site name.
+
+``` nginx
 ssl_certificate /etc/letsencrypt/live/hostingexplorer.com/fullchain.pem;
 ssl_certificate_key /etc/letsencrypt/live/hostingexplorer.com/privkey.pem;
 
 ```
 
-## Useful Commands
+## → Useful Commands
 
-Copy remote file content ```ssh tharindu@206.189.203.233  "cat /etc/nginx/sites-available/hostingexplorer.com"|pbcopy```
+Restart Nginx `sudo systemctl restart nginx`
+
+Restart PHP `sudo service php7.2-fpm restart`
+
+Copy remote file content `ssh tharindu@206.189.203.233  "cat /etc/nginx/sites-available/hostingexplorer.com"|pbcopy`
