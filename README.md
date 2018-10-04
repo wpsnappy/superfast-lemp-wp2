@@ -242,8 +242,6 @@ ssl_certificate_key /etc/letsencrypt/live/hostingexplorer.com/privkey.pem;
 
 ## → Useful Commands
 
-Restart Nginx `sudo systemctl restart nginx`
-
-Restart PHP `sudo service php7.2-fpm restart`
-
-Copy remote file content `ssh tharindu@206.189.203.233  "cat /etc/nginx/sites-available/hostingexplorer.com"|pbcopy`
+* Restart Nginx `sudo systemctl restart nginx`
+* Restart PHP `sudo service php7.2-fpm restart`
+* Copy remote file content `ssh tharindu@206.189.203.233  "cat /etc/nginx/sites-available/hostingexplorer.com"|pbcopy`
