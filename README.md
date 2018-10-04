@@ -221,6 +221,27 @@ sudo nano /etc/nginx/sites-available/hostingexplorer.com
 
 Or you can replace the entire configurations file from the code bellow.
 
+## HTTPS and HTTPS/2
+
+``` bash
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install python-certbot-nginx
+sudo certbot --nginx certonly
+```
+
+``` bash
+sudo nano /etc/nginx/sites-available/hostingexplorer.com
+```
+
+Add these lines below server name. Replace `hostingexplorer.com` to match your site name.
+
+``` nginx
+ssl_certificate /etc/letsencrypt/live/hostingexplorer.com/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/hostingexplorer.com/privkey.pem;
+
+```
+
 ``` nginx
 fastcgi_cache_path /var/www/hostingexplorer.com/cache levels=1:2 keys_zone=hostingexplorer.com:100m inactive=60m;
 
@@ -280,27 +301,6 @@ server {
   server_name hostingexplorer.com;
   return 301 https://www.$server_name$request_uri;
 }
-
-```
-
-## HTTPS and HTTPS/2
-
-``` bash
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get update
-sudo apt-get install python-certbot-nginx
-sudo certbot --nginx certonly
-```
-
-``` bash
-sudo nano /etc/nginx/sites-available/hostingexplorer.com
-```
-
-Add these lines below server name. Replace `hostingexplorer.com` to match your site name.
-
-``` nginx
-ssl_certificate /etc/letsencrypt/live/hostingexplorer.com/fullchain.pem;
-ssl_certificate_key /etc/letsencrypt/live/hostingexplorer.com/privkey.pem;
 
 ```
 
