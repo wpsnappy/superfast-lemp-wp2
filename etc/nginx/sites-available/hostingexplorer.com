@@ -4,13 +4,16 @@ server {
 	
 	listen 443 ssl http2;
 	listen [::]:443 ssl http2;
+	server_name www.hostingexplorer.com;
 
 	ssl_certificate /etc/letsencrypt/live/hostingexplorer.com/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/hostingexplorer.com/privkey.pem;
 
+#	access_log /var/www/hostingexplorer.com/logs/access.log;
+#	error_log  /var/www/hostingexplorer.com/logs/error.log;
+
 	root /var/www/hostingexplorer.com/public_html;
 	index index.php;
-	server_name www.hostingexplorer.com;
 
 	set $skip_cache 0;
 
@@ -34,7 +37,7 @@ server {
 	}
 
 	location / {
-		try_files $uri $uri/ =404;
+		try_files $uri $uri/ /index.php?$args;
 	}
 
 	location ~ \.php$ {
@@ -45,6 +48,10 @@ server {
 		fastcgi_no_cache $skip_cache;
 		fastcgi_cache hostingexplorer.com;
 		fastcgi_cache_valid 60m;
+	}
+
+	location ~* \.(css|js|ico|gif|jpe?g|png|svg|eot|otf|woff|woff2|ttf|ogg)$ {
+		expires max;
 	}
 
 }
