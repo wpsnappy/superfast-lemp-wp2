@@ -51,7 +51,8 @@ server {
 	}
 
 	location ~* \.(css|js|ico|gif|jpe?g|png|svg|eot|otf|woff|woff2|ttf|ogg)$ {
-		expires max;
+		expires 1y;
+		add_header Cache-Control "public";
 	}
 
 }
@@ -59,9 +60,7 @@ server {
 server {
 	listen 80;
 	listen [::]:80;
-	listen 443 ssl;
-	listen [::]:443 ssl;
-	server_name hostingexplorer.com;
+	server_name hostingexplorer.com www.hostingexplorer.com;
 
 	return 301 https://www.$server_name$request_uri;
 }
