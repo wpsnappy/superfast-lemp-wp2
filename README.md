@@ -47,8 +47,8 @@ sudo service ssh restart
 ### → Update Ubuntu
 
 ``` bash
-sudo apt update && sudo apt upgrade -y
-sudo apt autoremove -y
+sudo apt-get update && sudo apt upgrade -y
+sudo apt-get autoremove -y
 sudo reboot
 ```
 
