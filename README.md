@@ -116,6 +116,17 @@ sudo php-fpm7.2 -t
 sudo service php7.2-fpm restart
 ```
 
+Change the permission to `www-data` to your username. In my case it's `tharindu`.
+
+``` bash
+sudo nano /etc/php/7.2/fpm/pool.d/www.conf
+
+# user = www-data
+# group = www-data
+# listen.owner = www-data
+# listen.group = www-data
+```
+
 ## Setup `UFW` Firewall
 
 ### → Install `UFW` Firewall
