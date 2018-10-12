@@ -237,6 +237,8 @@ sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get update
 sudo apt-get install python-certbot-nginx
 sudo certbot --nginx certonly
+
+sudo certbot --manual -d "*.stackpartner.com" -d stackpartner.com --server https://acme-v02.api.letsencrypt.org/directory --preferred-challenges dns-01 certonly
 ```
 
 ``` bash
