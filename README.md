@@ -47,7 +47,7 @@ sudo service ssh restart
 ### → Update Ubuntu
 
 ``` bash
-sudo apt-get update && sudo apt upgrade -y
+sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get autoremove -y
 sudo reboot
 ```
@@ -153,9 +153,7 @@ sudo service fail2ban start
 ```
 
 ``` bash
-sudo mkdir -p /var/www/hostingexplorer.com/public_html
-sudo mkdir /var/www/hostingexplorer.com/cache
-sudo mkdir /var/www/hostingexplorer.com/logs
+sudo mkdir -p /var/www/hostingexplorer.com/{public_html,cache,logs}
 ```
 
 ``` bash
@@ -181,8 +179,8 @@ sudo systemctl restart nginx
 ``` bash
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://suro.ubaya.ac.id/mariadb/repo/10.3/ubuntu bionic main'
-sudo apt update
-sudo apt install mariadb-server
+sudo apt-get update
+sudo apt-get install mariadb-server
 sudo systemctl status mariadb
 sudo mysql_secure_installation
 ```
