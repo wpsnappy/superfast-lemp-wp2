@@ -152,7 +152,7 @@ sudo service fail2ban start
 
 ``` bash
 /var/www/
-├── hostingexplorer.com
+├── stackpartner.com
 │   └── public_html
 │   └── cache
 │   └── logs
@@ -164,11 +164,11 @@ sudo service fail2ban start
 ```
 
 ``` bash
-sudo mkdir -p /var/www/hostingexplorer.com/{public_html,cache,logs}
+sudo mkdir -p /var/www/stackpartner.com/{public_html,cache,logs}
 ```
 
 ``` bash
-sudo chown -R tharindu: /var/www/hostingexplorer.com
+sudo chown -R tharindu: /var/www/stackpartner.com
 ```
 
 ``` bash
@@ -177,8 +177,8 @@ sudo rm -f /etc/nginx/sites-enabled/default
 
 ``` bash
 cd /etc/nginx/sites-available
-sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/hostingexplorer.com
-sudo ln -s /etc/nginx/sites-available/hostingexplorer.com /etc/nginx/sites-enabled/
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/stackpartner.com
+sudo ln -s /etc/nginx/sites-available/stackpartner.com /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
 ```
@@ -213,7 +213,7 @@ exit;
 cd /tmp
 wget https://wordpress.org/latest.tar.gz
 tar xf latest.tar.gz
-sudo mv /tmp/wordpress/* /var/www/hostingexplorer.com/public_html
+sudo mv /tmp/wordpress/* /var/www/stackpartner.com/public_html
 ```
 
 ## Install Redis
@@ -223,9 +223,9 @@ sudo apt-get install redis-server
 ```
 
 ``` bash
-sudo nano /etc/nginx/sites-available/hostingexplorer.com
+sudo nano /etc/nginx/sites-available/stackpartner.com
 
-# Add 'fastcgi_cache_path /var/www/hostingexplorer.com/cache levels=1:2 keys_zone=hostingexplorer.com:100m inactive=60m;' before the server block
+# Add 'fastcgi_cache_path /var/www/stackpartner.com/cache levels=1:2 keys_zone=stackpartner.com:100m inactive=60m;' before the server block
 ```
 
 Or you can replace the entire configurations file from the code bellow.
@@ -238,35 +238,35 @@ sudo apt-get update
 sudo apt-get install python-certbot-nginx
 sudo certbot --nginx certonly
 
-sudo certbot --manual -d "*.stackpartner.com" -d stackpartner.com --server https://acme-v02.api.letsencrypt.org/directory --preferred-challenges dns-01 certonly
+sudo certbot --manual -d *.stackpartner.com -d stackpartner.com --server https://acme-v02.api.letsencrypt.org/directory --preferred-challenges dns-01 certonly
 ```
 
 ``` bash
-sudo nano /etc/nginx/sites-available/hostingexplorer.com
+sudo nano /etc/nginx/sites-available/stackpartner.com
 ```
 
 Add these lines below server name. Replace `hostingexplorer.com` to match your site name.
 
 ``` nginx
-ssl_certificate /etc/letsencrypt/live/hostingexplorer.com/fullchain.pem;
-ssl_certificate_key /etc/letsencrypt/live/hostingexplorer.com/privkey.pem;
+ssl_certificate /etc/letsencrypt/live/stackpartner.com/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/stackpartner.com/privkey.pem;
 
 ```
 
 ``` nginx
-fastcgi_cache_path /var/www/hostingexplorer.com/cache levels=1:2 keys_zone=hostingexplorer.com:100m inactive=60m;
+fastcgi_cache_path /var/www/stackpartner.com/cache levels=1:2 keys_zone=stackpartner.com:100m inactive=60m;
 
 server {
   
   listen 443 ssl http2;
   listen [::]:443 ssl http2;
   
-  ssl_certificate /etc/letsencrypt/live/hostingexplorer.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/hostingexplorer.com/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/stackpartner.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/stackpartner.com/privkey.pem;
   
-  root /var/www/hostingexplorer.com/public_html;
+  root /var/www/stackpartner.com/public_html;
   index index.php;
-  server_name www.hostingexplorer.com;
+  server_name www.stackpartner.com;
   
   set $skip_cache 0;
   
@@ -310,7 +310,7 @@ server {
   listen 443 ssl;
   listen [::]:443 ssl;
   
-  server_name hostingexplorer.com;
+  server_name stackpartner.com;
   return 301 https://www.$server_name$request_uri;
 }
 
@@ -320,4 +320,4 @@ server {
 
 * Restart Nginx `sudo systemctl restart nginx`
 * Restart PHP `sudo service php7.2-fpm restart`
-* Copy remote file content `ssh tharindu@206.189.203.233  "cat /etc/nginx/sites-available/hostingexplorer.com"|pbcopy`
+* Copy remote file content `ssh tharindu@206.189.203.233  "cat /etc/nginx/sites-available/stackpartner.com"|pbcopy`
